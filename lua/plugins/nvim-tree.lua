@@ -52,10 +52,21 @@ return {
     })
 
     local keymap = vim.keymap
+    local opts = { noremap = true, silent = true, nowait = true }
 
-    keymap.set("n", "<leader>ee", "<cmd>NvimTreeToggle<CR>") -- togle file explorer
-    keymap.set("n", "<leader>ef", "<cmd>NvimTreeFindFileToggle<CR>") -- togle file explorer
-    keymap.set("n", "<leader>ec", "<cmd>NvimTreeCollapse<CR>") -- collapse file explorer
-    keymap.set("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>") -- refresh file explorer
+    opts.desc = "Focus NvimTree"
+    keymap.set("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", opts)
+
+    opts.desc = "Togle file explorer"
+    keymap.set("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", opts)
+
+    -- opts.desc = "Togle file explorer"
+    -- keymap.set("n", "<leader>ef", "<cmd>NvimTreeFindFileToggle<CR>")
+    --
+    -- opts.desc = "Collapse file explorer"
+    -- keymap.set("n", "<leader>ec", "<cmd>NvimTreeCollapse<CR>")
+    --
+    -- opts.desc = "Refresh file explorer"
+    -- keymap.set("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>")
   end,
 }
