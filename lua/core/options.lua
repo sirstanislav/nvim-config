@@ -39,6 +39,7 @@ opt.whichwrap:append("<>[]hl")
 opt.number = true
 opt.ruler = false
 
+opt.undofile = true
 opt.cursorline = true
 opt.mouse = "a"
 opt.listchars = { space = "·" }

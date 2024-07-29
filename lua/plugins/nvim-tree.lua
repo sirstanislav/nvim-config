@@ -7,8 +7,6 @@ return {
     "nvim-tree/nvim-web-devicons",
   },
   config = function()
-    local nvimtree = require("nvim-tree")
-
     -- disable netrw at the very start of your init.lua
     vim.g.loaded_netrw = 1
     vim.g.loaded_netrwPlugin = 1
@@ -16,19 +14,40 @@ return {
     -- set termguicolors to enable highlight groups
     vim.opt.termguicolors = true
 
-    -- OR setup with some options
+    -- or setup with some options
     require("nvim-tree").setup({
+      filters = {
+        custom = {
+          ".DS_Store",
+        },
+        dotfiles = false,
+      },
+      -- keeps the cursor on the first letter of the filename when moving in the tree
+      hijack_cursor = true,
+
+      -- changes how files within the same directory are sorted
       sort = {
-        sorter = "case_sensitive",
+        sorter = "name",
       },
       view = {
+        -- a table indicates that the view should be dynamically sized
+        -- based on the longest line
         adaptive_size = true,
       },
       renderer = {
-        group_empty = true,
+        -- set to `false` to hide the root folder
+        root_folder_label = false,
+
+        -- compact folders that only contain a single folder into one node
+        group_empty = false,
+
+        -- highlight icons and/or names for |bufloaded()| files
         highlight_opened_files = "all",
+
+        -- highlight icons and/or names for modified files
         highlight_modified = "icon",
 
+        -- configuration options for tree indent markers
         indent_markers = {
           enable = true,
           icons = {
@@ -40,14 +59,12 @@ return {
           },
         },
       },
-      filters = {
-        custom = {
-          ".DS_Store",
-        },
-        dotfiles = false,
-      },
-      git = {
-        ignore = false,
+
+      -- update the focused file on `BufEnter`, un-collapses the folders recursively
+      -- until it finds the file
+      update_focused_file = {
+        enable = true,
+        update_root = false,
       },
     })
 
